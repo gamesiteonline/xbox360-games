@@ -1,0 +1,131 @@
+{
+  "version": 2,
+  "buildCommand": "pnpm build",
+  "outputDirectory": "dist",
+  "devCommand": "pnpm dev",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "framework": "other",
+  "env": {
+    "NODE_ENV": {
+      "value": "production"
+    },
+    "DATABASE_URL": {
+      "description": "MySQL/TiDB database connection string",
+      "required": true
+    },
+    "JWT_SECRET": {
+      "description": "Secret key for JWT token signing",
+      "required": true
+    },
+    "VITE_APP_ID": {
+      "description": "Manus OAuth application ID",
+      "required": true
+    },
+    "OAUTH_SERVER_URL": {
+      "description": "Manus OAuth server URL",
+      "required": true
+    },
+    "VITE_OAUTH_PORTAL_URL": {
+      "description": "Manus OAuth portal URL",
+      "required": true
+    },
+    "OWNER_OPEN_ID": {
+      "description": "Owner's Manus OpenID",
+      "required": true
+    },
+    "OWNER_NAME": {
+      "description": "Owner name (Fahad)",
+      "required": true
+    },
+    "BUILT_IN_FORGE_API_URL": {
+      "description": "Manus built-in APIs URL",
+      "required": true
+    },
+    "BUILT_IN_FORGE_API_KEY": {
+      "description": "Manus built-in APIs key (server-side)",
+      "required": true
+    },
+    "VITE_FRONTEND_FORGE_API_URL": {
+      "description": "Manus built-in APIs URL (frontend)",
+      "required": true
+    },
+    "VITE_FRONTEND_FORGE_API_KEY": {
+      "description": "Manus built-in APIs key (frontend)",
+      "required": true
+    },
+    "VITE_ANALYTICS_ENDPOINT": {
+      "description": "Analytics endpoint URL",
+      "required": false
+    },
+    "VITE_ANALYTICS_WEBSITE_ID": {
+      "description": "Analytics website ID",
+      "required": false
+    },
+    "VITE_APP_TITLE": {
+      "description": "Application title",
+      "value": "Gamesiteonline - DOS Games"
+    },
+    "VITE_APP_LOGO": {
+      "description": "Application logo URL",
+      "required": false
+    }
+  },
+  "regions": ["iad1"],
+  "public": false,
+  "git": {
+    "deploymentEnabled": {
+      "main": true
+    }
+  },
+  "functions": {
+    "server/_core/index.ts": {
+      "maxDuration": 60,
+      "memory": 512
+    }
+  },
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
+    },
+    {
+      "source": "/static/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/old-path",
+      "destination": "/new-path",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    }
+  ]
+}
