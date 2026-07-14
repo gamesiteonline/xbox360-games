@@ -7,39 +7,7 @@
   "regions": [
     "iad1"
   ],
-  "git": {
-    "deploymentEnabled": {
-      "main": true
-    }
-  },
-  "functions": {
-    "server/_core/index.ts": {
-      "maxDuration": 60,
-      "memory": 512
-    }
-  },
   "headers": [
-    {
-      "source": "/api/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-cache, no-store, must-revalidate"
-        },
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        }
-      ]
-    },
     {
       "source": "/static/(.*)",
       "headers": [
@@ -48,19 +16,6 @@
           "value": "public, max-age=31536000, immutable"
         }
       ]
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/old-path",
-      "destination": "/new-path",
-      "permanent": true
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
     }
   ]
 }
