@@ -4,7 +4,6 @@
   "outputDirectory": "dist",
   "devCommand": "pnpm dev",
   "installCommand": "pnpm install --frozen-lockfile",
-  "framework": "other",
   "regions": [
     "iad1"
   ],
